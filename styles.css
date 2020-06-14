@@ -1,0 +1,97 @@
+* {
+	padding:0;
+	margin:0;
+	border:0;
+	font-family:Arial, Helvetica, sans-serif; font-size:1em; }
+
+html, body {
+	width:100%;
+	height:100%;
+}
+
+body {
+	text-align:center;
+}
+
+sup, small {
+	font-size:80%; }
+
+a {
+	color:#666666;
+	text-decoration:underline; }
+
+a:hover {
+	color:black; }
+
+table {
+	border-collapse:collapse; }
+	
+h1 {
+	display:none; }
+
+#time-window {
+	margin:180px auto 100px;
+	max-width:792px;
+	text-align:center; }
+	
+@media screen and (max-width:640px) {
+	#time-window {
+		margin:60px auto;
+		max-width:792px;
+		text-align:center;
+	}
+}
+
+#time-window #dec-time-table {
+	width:90%;
+	margin:0 auto;
+}
+	
+#time-window #dec-time-table td {
+	width:66px;
+	text-align:center; }
+
+@media screen and (max-width:640px) {
+	#time-window #dec-time-table td {
+		min-width:25px;
+		text-align:center;
+	}
+}
+	
+#time-window #dec-time-table .dec-time-digit {
+	font-size:80px;
+	font-family:monospace;
+	color:black;
+	font-weight:bold;
+	text-align:center;
+	line-height:1em; }
+	
+@media screen and (max-width:640px) {
+	#time-window #dec-time-table .dec-time-digit {
+		font-size:36px;
+	}
+}
+	
+#time-window #dec-time-table .dec-date {
+	color:#666666; }
+	
+#time-window #dec-time-table .abbreviations {
+	font-size:10px; }
+	
+@media screen and (max-width:640px) {
+	#time-window #dec-time-table .abbreviations {
+		font-size:8px;
+	}
+}
+	
+#time-window .normal-time {
+	padding-top:18px;
+	font-weight:bold;
+	line-height:18px; }
+	
+#time-window #normal-date {
+	color:#666666; }
+	
+#time-window .description {
+	padding-top:18px;
+	font-size:80%;; }

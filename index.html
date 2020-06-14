@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-5" />
+<title>The Decimal Time - Realized by Johannes Bouchain</title>
+<meta name="description" lang="en" content="The Decimal Time - Realized by Johannes Bouchain" />
+<meta name="author" content="Johannes Bouchain" />
+<meta name="robots" content="index" />
+<meta name="robots" content="follow" />
+<meta name="keywords" lang="de" content="Dezimalzeit, dezimale Zeit, metrische Zeit, Uhr" />
+<meta name="keywords" lang="en" content="decimal time, metric time, french revolutionary" />
+<script type="text/javascript">
+<!--
+function DisplayDecimalTime() {
+/* get current date, Daylight Saving Time (DST) not yet subtracted */
+var currentDateDST = new Date();
+
+/* get reference date (January 1 of current year, 00:00:00) and subtract DST hour, if current time is DST */
+var currentYear = currentDateDST.getFullYear();
+var referenceDate = new Date("January 1, " + currentYear + " 00:00:00");
+var DSTdifference = (referenceDate.getTimezoneOffset() - currentDateDST.getTimezoneOffset()) * 60 * 1000;
+var currentDate = new Date(Number(new Date()) - DSTdifference);
+
+/* get elements for normal time display */
+var Hrs = currentDate.getHours();
+var Min = currentDate.getMinutes();
+var Sec = currentDate.getSeconds();
+var Day = currentDate.getDate();
+var Mon = currentDate.getMonth() + 1;
+var Year = currentDate.getFullYear();
+
+/* preparing normal time display */
+var DisplayMon = ((Mon < 10) ? "0" + Mon : Mon);
+var DisplayDay = ((Day < 10) ? "0" + Day : Day);
+var DisplayHrs = ((Hrs < 10) ? "0" + Hrs : Hrs);
+var DisplayMin = ((Min < 10) ? ":0" + Min : ":" + Min);
+var DisplaySec = ((Sec < 10) ? ":0" + Sec : ":" + Sec);
+var DisplayDate = currentYear + "/" + DisplayMon + "/" + DisplayDay + " - ";
+var DisplayTime = DisplayHrs + DisplayMin + DisplaySec;
+
+/* calculating decimal time */
+var MillisecondsPerDay = 24 * 60 * 60 * 1000; 
+var currentDays = Math.ceil((parseFloat(currentDate - referenceDate ) + DSTdifference + 1000) / MillisecondsPerDay);
+var DecimalDecades = String(currentDays - 1).slice(0,2);
+var DecimalDays = String(currentDays).slice(2,3);
+
+var MilliSec = (currentDate.getMilliseconds() + currentDate.getSeconds()*1000 + currentDate.getMinutes() *60000 + currentDate.getHours() * 3600000) / 864;
+var DecimalHrs = Math.floor(MilliSec / 10000);
+var DecimalMin = Math.floor((MilliSec - Math.floor(MilliSec / 10000)*10000) / 100);
+var DecimalSec = Math.floor(MilliSec - Math.floor(MilliSec / 100)*100);
+
+/* preparing decimal time display */
+var DisplayDDecs = ((DecimalDecades < 10) ? "0" + DecimalDecades : DecimalDecades);
+var DisplayDDays = ((DecimalDays < 1) ? "0" : DecimalDays);
+var DisplayDHrs = ((DecimalHrs < 1) ? "0" : DecimalHrs);
+var DisplayDMin = ((DecimalMin < 10) ? "0" + DecimalMin : DecimalMin);
+var DisplayDSec = ((DecimalSec < 10) ? "0" + DecimalSec : DecimalSec);
+var DisplayTimeD = currentYear + "" + DisplayDDecs + "" + DisplayDDays + DisplayDHrs + DisplayDMin + DisplayDSec;
+
+/* displaying decimal time */
+for(var i=0;i<12;i++) {
+	var NewDigit = document.createTextNode(DisplayTimeD.charAt(i));
+	document.getElementById("dec-time-digit" + (i+1)).replaceChild(NewDigit, document.getElementById("dec-time-digit" + (i+1)).firstChild);
+}
+
+/* displaying normal time */
+var NormalTimeDisplay = document.createTextNode(DisplayTime);
+document.getElementById("normal-time").replaceChild(NormalTimeDisplay, document.getElementById("normal-time").firstChild);
+var NormalDateDisplay = document.createTextNode(DisplayDate);
+document.getElementById("normal-date").replaceChild(NormalDateDisplay, document.getElementById("normal-date").firstChild);
+
+/* set loop interval */
+window.setTimeout("DisplayDecimalTime()",108);
+}
+
+//-->
+</script>
+<link rel="stylesheet" type="text/css" media="screen, projection" href="styles.css" />
+
+</head>
+<body onload="window.setTimeout('DisplayDecimalTime()',108)">
+<div id="time-window">
+	<h1>Decimal Time</h1>
+	<table id="dec-time-table">
+		<tr>
+			<td><span id="dec-time-digit1" class="dec-time-digit dec-date">&nbsp;</span></td><td><span id="dec-time-digit2" class="dec-time-digit dec-date">&nbsp;</span></td><td><span id="dec-time-digit3" class="dec-time-digit dec-date">&nbsp;</span></td><td><span id="dec-time-digit4" class="dec-time-digit dec-date">&nbsp;</span></td><td><span id="dec-time-digit5" class="dec-time-digit dec-date">&nbsp;</span></td><td><span id="dec-time-digit6" class="dec-time-digit dec-date">&nbsp;</span></td><td><span id="dec-time-digit7" class="dec-time-digit dec-date">&nbsp;</span></td><td><span id="dec-time-digit8" class="dec-time-digit">&nbsp;</span></td><td><span id="dec-time-digit9" class="dec-time-digit">&nbsp;</span></td><td><span id="dec-time-digit10" class="dec-time-digit">&nbsp;</span></td><td><span id="dec-time-digit11" class="dec-time-digit">&nbsp;</span></td><td><span id="dec-time-digit12" class="dec-time-digit">&nbsp;</span></td>
+		</tr>
+		<tr class="abbreviations">
+			<td class="dec-date">a*10<sup>3</sup></td><td class="dec-date">a*10<sup>2</sup></td><td class="dec-date">a*10<sup>1</sup></td><td class="dec-date">a</td><td class="dec-date">d*10<sup>2</sup></td><td class="dec-date">d*10<sup>1</sup></td><td class="dec-date">d</td><td>d*10<sup>-1</sup></td><td>d*10<sup>-2</sup></td><td>d*10<sup>-3</sup></td><td>d*10<sup>-4</sup></td><td>d*10<sup>-5</sup></td>
+		</tr>
+	</table>
+	<p class="normal-time"><span id="normal-date">&nbsp;</span><span id="normal-time">&nbsp;</span></p>
+	<p class="description">This Decimal Time Display was modelled on the <a href="http://en.wikipedia.org/wiki/Decimal_time#France">French Revolutionary Decimal Time</a>. Daylight Saving Time (DST) is not considered&mdash;once Decimal Time is introduced globally, DST will hopefully be a quirk of history. Local time, however, is allowed for. For more details about various decimal time systems, see <a href="http://en.wikipedia.org/wiki/Decimal_time">Wikipedia</a>.</p>
+	<p class="description">First realized 2000 using <a href="http://de.wikipedia.org/wiki/QBasic">QBasic</a>, second version with JavaScript 2004, modified 2008.</p>
+	<p class="description"><small>&copy; Stadtkreation 2008 - <a href="http://www.stadtkreation.de">www.stadtkreation.de</a></small></p>
+	
+</div>
+</body></html>
